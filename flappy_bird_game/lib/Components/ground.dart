@@ -1,6 +1,7 @@
 import 'package:flame/components.dart';
-import 'package:flame/parallax.dart';  
+import 'package:flame/parallax.dart';
 import 'package:flappy_bird_game/Game/assets.dart';
+import 'package:flappy_bird_game/Game/configurations.dart';
 import 'package:flappy_bird_game/Game/flappy_bird_game.dart';
 import 'package:flame/flame.dart';
 
@@ -22,6 +23,6 @@ class Ground extends ParallaxComponent<FlappyBirdGame> {
   @override
   void update(double dt) {
     super.update(dt);
-    // Add any custom logic here for updating the parallax
+    parallax ?.baseVelocity.x = Config.gameSpeed;
   }
 }
