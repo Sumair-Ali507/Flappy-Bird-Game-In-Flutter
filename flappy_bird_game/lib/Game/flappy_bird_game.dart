@@ -7,8 +7,9 @@ import 'package:flappy_bird_game/Components/ground.dart';
 import 'package:flappy_bird_game/Components/pipe_group.dart';
 import 'package:flappy_bird_game/Game/configurations.dart';
 import 'package:flame/timer.dart';
+import 'package:flame/events.dart';
 
-class FlappyBirdGame extends FlameGame {
+class FlappyBirdGame extends FlameGame with TapDetector{
   late Bird bird;
   Timer interval = Timer(Config.pipeInterval, repeat: true);
 
@@ -24,9 +25,18 @@ class FlappyBirdGame extends FlameGame {
 
   }
 
+
+  @override
+  void onTap(){
+    super.onTap();
+    bird.fly();
+  }
+
+
   @override
   void update(double dt) {
     super.update(dt);
     interval.update(dt);
+
   }
 }

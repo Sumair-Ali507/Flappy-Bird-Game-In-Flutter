@@ -1,7 +1,10 @@
 import 'package:flame/components.dart';
 import 'package:flappy_bird_game/Game/assets.dart';
 import 'package:flappy_bird_game/Game/bird_movements.dart';
+import 'package:flappy_bird_game/Game/configurations.dart';
 import 'package:flappy_bird_game/Game/flappy_bird_game.dart';
+import 'package:flame/effects.dart';
+import 'package:flutter/animation.dart';
 
 
 class Bird extends SpriteGroupComponent<BirdMovement> with HasGameRef<FlappyBirdGame> {
@@ -25,5 +28,26 @@ class Bird extends SpriteGroupComponent<BirdMovement> with HasGameRef<FlappyBird
     current = BirdMovement.middle;
     size = Vector2(50, 40);
     position = Vector2(50, gameRef.size.y / 2 - size.y / 2); // Center the bird vertically
+  }
+
+  void fly(){
+
+    add(
+      MoveByEffect(
+        Vector2(0, Config.gravity),
+        EffectController(duration: 0.2, curve: Curves.decelerate),
+        onComplete: () => current = BirdMovement.down,
+      ),
+    );
+
+    current = BirdMovement.up;
+  }
+
+
+  @override
+  void update(double dt){
+    super.update(dt);
+    position.y += Config.birdVelocity *dt;
+
   }
 }
