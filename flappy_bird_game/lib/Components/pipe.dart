@@ -4,6 +4,7 @@ import 'package:flappy_bird_game/Game/configurations.dart';
 import 'package:flappy_bird_game/Game/flappy_bird_game.dart';
 import 'package:flame/flame.dart';
 import 'package:flappy_bird_game/Game/obstacles.dart';
+import 'package:flame/collisions.dart';
 
 
 class Pipe extends SpriteComponent with HasGameRef<FlappyBirdGame> {
@@ -34,6 +35,10 @@ class Pipe extends SpriteComponent with HasGameRef<FlappyBirdGame> {
         sprite = Sprite(pipe);  // Assign the regular sprite
         break;
     }
+
+    add(
+     RectangleHitbox(),
+    );
 
 
   }
