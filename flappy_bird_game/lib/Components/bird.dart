@@ -13,6 +13,9 @@ import 'package:flutter/cupertino.dart';
 class Bird extends SpriteGroupComponent<BirdMovement> with HasGameRef<FlappyBirdGame>  ,CollisionCallbacks{
   Bird();
 
+  int score =0;
+
+
   @override
   Future<void> onLoad() async {
     //await super.onLoad(); // Ensure you call this
@@ -63,9 +66,22 @@ class Bird extends SpriteGroupComponent<BirdMovement> with HasGameRef<FlappyBird
     //debugPrint('Collision Detected');
   }
 
-  void gameOver(){
-    gameRef.pauseEngine();
+  void reset(){
+    position = Vector2(50, gameRef.size.y/2 - size.y/2);
+    score=0;
+
   }
+
+  void gameOver(){
+    game.overlays.add('gameOver');
+    gameRef.pauseEngine();
+    game.isHit=true;
+
+
+
+  }
+
+
 
 
   @override
